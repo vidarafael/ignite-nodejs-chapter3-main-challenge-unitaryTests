@@ -1,12 +1,8 @@
 import { app } from "../../../../app"
-import { hash } from "bcryptjs";
 import request from "supertest"
-import { v4 as uuidV4 } from "uuid"
-
 import { Connection, createConnection } from "typeorm";
 
 let connection: Connection;
-
 describe("Create User Controller", () => {
   beforeAll(async () => {
     connection = await createConnection()
@@ -31,16 +27,18 @@ describe("Create User Controller", () => {
   it("should not be create an user with user exists", async () => {
     await request(app).post("/api/v1/users").send({
       email: "user@example.com",
-      name: "user 1",
+      name: "user testando fi",
       password: "1234"
     })
 
     const response = await request(app).post("/api/v1/users").send({
       email: "user@example.com",
-      name: "user 2",
+      name: "user testando tambem",
       password: "12345"
     })
 
     expect(response.status).toBe(400)
+
+
   })
 })

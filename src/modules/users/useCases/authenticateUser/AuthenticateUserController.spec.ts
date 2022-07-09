@@ -40,4 +40,22 @@ describe("Authenticate User Controller", () => {
     }))
   })
 
+  it("should not be authenticate an user if credentials of email incorrect", async () => {
+    const response = await request(app).post("/api/v1/sessions").send({
+      email: "user@examplesIncorrect.com",
+      password: "1234"
+    })
+
+    expect(response.status).toBe(401)
+  })
+
+  it("should not be authenticate an user if credentials of password incorrect", async () => {
+    const response = await request(app).post("/api/v1/sessions").send({
+      email: "user@examples.com",
+      password: "passwordincorrect"
+    })
+
+    expect(response.status).toBe(401)
+  })
+
 })

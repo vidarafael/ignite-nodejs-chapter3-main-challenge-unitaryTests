@@ -25,8 +25,7 @@ describe("Show user profile", () => {
     expect(showUser).toHaveProperty("id")
   })
 
-  it("should not be show user profile", async () => {
-
+  it("should not be show user profile", () => {
     expect(async () => {
       const user = await createUserUseCase.execute({
         name: "user test",
@@ -38,3 +37,5 @@ describe("Show user profile", () => {
     }).rejects.toBeInstanceOf(ShowUserProfileError)
   })
 })
+
+
